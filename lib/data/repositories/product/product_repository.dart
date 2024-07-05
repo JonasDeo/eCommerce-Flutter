@@ -163,6 +163,25 @@ class ProductRepository extends GetxController {
     }
   }
 
+  Future<List<ProductModel>> searchProducts(String query) async {
+    try {
+      // Retrieve a broader set of results (initial optimization by first letter)
+      QuerySnapshot snapshot = await _db.collection('Products').get();
+
+      // Filter results client-side for case-insensitive substring matches
+      List<ProductModel> products = snapshot.docs
+          .map((doc) => ProductModel.fromQuerySnapshot(doc))
+          .where((product) =>
+              product.title.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+
+      return products;
+    } catch (e) {
+      print("Error searching products: $e");
+      throw Exception("Failed to search products");
+    }
+  }
+
   /// Upload dummy data to the Cloud Firebase
   Future<void> uploadDummyData(List<ProductModel> products) async {
     try {

@@ -1,12 +1,12 @@
 class TPricingCalculator {
   static double calculateTotalPrice(double subTotal, String location) {
-    double taxRate = getTaxRateForLocation(location);
-    double taxAmount = subTotal * taxRate;
+    //  double taxRate = getTaxRateForLocation(location);
+    // double taxAmount = subTotal;
 
-    double shippingCost = getShippingCost(location);
+    // double shippingCost = getShippingCost(location);
 
-    double totalPrice = subTotal * taxAmount * shippingCost;
-
+    // double totalPrice = subTotal * taxAmount * shippingCost;
+    double totalPrice = subTotal;
     return totalPrice;
   }
 

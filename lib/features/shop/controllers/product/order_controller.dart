@@ -65,7 +65,7 @@ class OrderController extends GetxController {
 
       //show Success Screen
       Get.off(() => SuccessScreen(
-            image: TImages.orderCompletedAnimation,
+            image: TImages.packageAnimation,
             title: 'Payment Success!',
             subTitle: 'Your Item will be shipped soon!',
             onPressed: () => Get.offAll(() => const NavigationMenu()),

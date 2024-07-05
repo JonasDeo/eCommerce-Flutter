@@ -24,7 +24,7 @@ class TBillingAmountSection extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             Text(
-              '\$$subTotal',
+              '$subTotal\/\=',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
@@ -40,7 +40,7 @@ class TBillingAmountSection extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             Text(
-              '\$${TPricingCalculator.calculateShippingCost(subTotal, 'US')}',
+              '${TPricingCalculator.calculateShippingCost(subTotal, 'TZ')}\/\=',
               style: Theme.of(context).textTheme.labelLarge,
             ),
           ],
@@ -56,7 +56,7 @@ class TBillingAmountSection extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             Text(
-              '\$${TPricingCalculator.calculateTax(subTotal, 'US')}',
+              '${TPricingCalculator.calculateTax(subTotal, 'TZ')}\/\=',
               style: Theme.of(context).textTheme.labelLarge,
             ),
           ],
@@ -72,7 +72,7 @@ class TBillingAmountSection extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             Text(
-              '\$${TPricingCalculator.calculateTotalPrice(subTotal, 'US')}',
+              '${TPricingCalculator.calculateTotalPrice(subTotal, 'US')}\/\=',
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ],

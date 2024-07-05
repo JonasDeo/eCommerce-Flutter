@@ -19,9 +19,9 @@ class CartScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: TAppBar(
-          showBackArrow: true,
-          title:
-              Text('Cart', style: Theme.of(context).textTheme.headlineSmall)),
+        showBackArrow: true,
+        title: Text('Cart', style: Theme.of(context).textTheme.headlineSmall),
+      ),
       body: Obx(() {
         final emptyWidget = TAnimationLoaderWidget(
           text: 'Whoops! Cart is EMPTY.',
@@ -53,7 +53,7 @@ class CartScreen extends StatelessWidget {
               child: ElevatedButton(
                   onPressed: () => Get.to(() => const CheckOutScreen()),
                   child: Obx(() =>
-                      Text('Checkout \$${controller.totalCartPrice.value}'))),
+                      Text('Checkout ${controller.totalCartPrice.value}\/\='))),
             ),
     );
   }

@@ -8,6 +8,7 @@ import 'package:shopping/common/widgets/products/cart/cart_menu_icon.dart';
 import 'package:shopping/common/widgets/brands/brand_card.dart';
 import 'package:shopping/common/widgets/shimmers/brands_shimmer.dart';
 import 'package:shopping/common/widgets/texts/section_heading.dart';
+import 'package:shopping/features/authentication/screens/search_screen.dart';
 import 'package:shopping/features/shop/controllers/brand_controller.dart';
 import 'package:shopping/features/shop/controllers/category_controller.dart';
 import 'package:shopping/features/shop/screens/brands/all_brands.dart';
@@ -58,11 +59,12 @@ class StoreScreen extends StatelessWidget {
                     children: [
                       //search box
                       const SizedBox(height: TSizes.spaceBtwItems),
-                      const TSearchContainer(
+                      TSearchContainer(
                         text: 'Search in Store',
-                        showBackground: false,
                         showBorder: true,
-                        padding: EdgeInsets.zero,
+                        onTap: () {
+                          Get.to(() => SearchScreen());
+                        },
                       ),
                       const SizedBox(height: TSizes.spaceBtwSections),
 

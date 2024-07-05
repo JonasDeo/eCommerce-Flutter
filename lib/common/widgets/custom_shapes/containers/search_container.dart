@@ -13,7 +13,7 @@ class TSearchContainer extends StatelessWidget {
     this.showBackground = true,
     this.showBorder = true,
     this.onTap,
-    this.padding = const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
+    this.padding = const EdgeInsets.all(TSizes.cardRadiusLg),
   });
 
   final String text;

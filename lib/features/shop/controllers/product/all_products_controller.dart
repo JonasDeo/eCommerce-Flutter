@@ -7,6 +7,7 @@ import 'package:shopping/features/shop/models/product_model.dart';
 class AllProductsController extends GetxController {
   static AllProductsController get instance => Get.find();
 
+  final isLoading = false.obs;
   final repository = ProductRepository.instance;
   final RxString selectedSortOption = 'Name'.obs;
   final RxList<ProductModel> products = <ProductModel>[].obs;
@@ -60,4 +61,33 @@ class AllProductsController extends GetxController {
     this.products.assignAll(products);
     sortProducts('name');
   }
+
+  // Future<void> searchProducts(String query) async {
+  //   try {
+  //     final searchQuery = _buildSearchQuery(query);
+  //     final searchResults = await fetchProductsByQuery(searchQuery);
+  //     assignProducts(searchResults);
+  //   } catch (e) {
+  //     TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+  //   }
+  // }
+
+  void searchProducts(String query) async {
+    isLoading.value = true;
+    try {
+      final searchResults = await repository.searchProducts(query);
+      products.assignAll(searchResults);
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  // Query _buildSearchQuery(String query) {
+  //   return FirebaseFirestore.instance
+  //       .collection('products')
+  //       .where('title', isGreaterThanOrEqualTo: query)
+  //       .where('title', isLessThanOrEqualTo: '$query\uf8ff');
+  // }
 }

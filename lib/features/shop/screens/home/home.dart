@@ -7,6 +7,7 @@ import 'package:shopping/common/widgets/layout/grid_layout.dart';
 import 'package:shopping/common/widgets/products/products_cards/product_card_vertical.dart';
 import 'package:shopping/common/widgets/shimmers/vertical_product_shimmer.dart';
 import 'package:shopping/common/widgets/texts/section_heading.dart';
+import 'package:shopping/features/authentication/screens/search_screen.dart';
 import 'package:shopping/features/shop/controllers/product/product_controller.dart';
 import 'package:shopping/features/shop/screens/all_products/all_products.dart';
 import 'package:shopping/features/shop/screens/home/widgets/home_appbar.dart';
@@ -24,7 +25,7 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const TPrimaryHeaderContainer(
+            TPrimaryHeaderContainer(
               child: Column(
                 children: [
                   //header
@@ -32,7 +33,13 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: TSizes.spaceBtwSections),
 
                   //searchBar
-                  TSearchContainer(text: 'Search in Store', showBorder: false),
+                  TSearchContainer(
+                    text: 'Search in Store',
+                    showBorder: false,
+                    onTap: () {
+                      Get.to(() => SearchScreen());
+                    },
+                  ),
                   SizedBox(height: TSizes.spaceBtwSections),
 
                   //categories
@@ -82,7 +89,6 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: TSizes.spaceBtwSections),
 
                   //popular products
-
                   Obx(() {
                     if (controller.isLoading.value) {
                       return const TVerticalProductShimmer();
