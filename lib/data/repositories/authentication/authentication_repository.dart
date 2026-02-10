@@ -21,9 +21,6 @@ class AuthenticationRepository extends GetxController {
   //variables
   final deviceStorage = GetStorage();
   final _auth = FirebaseAuth.instance;
-  // FIX: Instantiate GoogleSignIn as a class-level field with scopes.
-  // In google_sign_in v7+, GoogleSignIn() is no longer a valid constructor call inline.
-  final _googleSignIn = GoogleSignIn(scopes: ['email']);
 
   User get authUser => _auth.currentUser!;
 
@@ -131,17 +128,16 @@ class AuthenticationRepository extends GetxController {
   //google signin
   Future<UserCredential?> signInWithGoogle() async {
     try {
-      // FIX: Use the class-level _googleSignIn instance instead of GoogleSignIn()
-      final GoogleSignInAccount? userAccount = await _googleSignIn.signIn();
+      //trigger authentication flow
+      final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
 
       //obtain the auth details
       final GoogleSignInAuthentication? googleAuth =
           await userAccount?.authentication;
 
-      // FIX: accessToken is no longer available in google_sign_in v7+.
-      // Only idToken is provided. GoogleAuthProvider.credential() still works
-      // with idToken alone for Firebase Authentication.
+      //create a new credential
       final credentials = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,
       );
 
@@ -164,8 +160,7 @@ class AuthenticationRepository extends GetxController {
   //logout user
   Future<void> logout() async {
     try {
-      // FIX: Use the class-level _googleSignIn instance instead of GoogleSignIn()
-      await _googleSignIn.signOut();
+      await GoogleSignIn().signOut();
       await FirebaseAuth.instance.signOut();
       Get.offAll(() => const LoginScreen());
     } on FirebaseAuthException catch (e) {
