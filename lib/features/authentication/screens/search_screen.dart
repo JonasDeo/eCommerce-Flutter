@@ -369,9 +369,9 @@ class _SearchScreenState extends State<SearchScreen> {
                       expanded: _brandsExpanded,
                       onToggle: () => _brandsExpanded.toggle(),
                       child: Obx(() {
-                        if (brandController.isLoading.value) {
-                          return const _SectionShimmer();
-                        }
+                        // if (brandController.isLoading.value) {
+                        //   return const _SectionShimmer();
+                        // }
                         if (brandController.allBrands.isEmpty) {
                           return const _SectionEmpty(
                               message: 'No brands available');

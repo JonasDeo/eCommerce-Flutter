@@ -42,27 +42,28 @@ class TSortableProducts extends StatelessWidget {
 
             const SizedBox(width: TSizes.sm),
 
-            // Filter button
-            Obx(() {
-              final hasFilters = controller.selectedBrand.value.isNotEmpty ||
-                  controller.selectedCategory.value.isNotEmpty ||
-                  controller.minPrice.value > 0 ||
-                  controller.maxPrice.value < 100000;
+            // // Filter button
+            // Obx(() {
+            //   final hasFilters = controller.selectedBrand.value.isNotEmpty ||
+            //       controller.selectedCategory.value.isNotEmpty ||
+            //       controller.minPrice.value > 0 ||
+            //       controller.maxPrice.value < 100000;
 
-              return Badge(
-                isLabelVisible: hasFilters,
-                child: IconButton(
-                  icon: const Icon(Iconsax.filter),
-                  style: IconButton.styleFrom(
-                    side: BorderSide(color: Theme.of(context).dividerColor),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(TSizes.borderRadiusMd),
-                    ),
-                  ),
-                  onPressed: () => TFilterBottomSheet.show(context),
-                ),
-              );
-            }),
+            //   return Badge(
+            //     isLabelVisible: hasFilters,
+            //     child: IconButton(
+            //       icon: const Icon(Iconsax.filter),
+            //       style: IconButton.styleFrom(
+            //         side: BorderSide(color: Theme.of(context).dividerColor),
+            //         shape: RoundedRectangleBorder(
+            //           borderRadius: BorderRadius.circular(TSizes.borderRadiusMd),
+            //         ),
+            //       ),
+            //       onPressed: () => TFilterBottomSheet.show(context),
+            //     ),
+            //   );
+            // }),
+          
           ],
         ),
 
