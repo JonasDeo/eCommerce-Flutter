@@ -21,6 +21,7 @@ class OrderController extends GetxController {
   final addressController = AddressController.instance;
   final checkoutController = CheckoutController.instance;
   final orderRepository = Get.put(OrderRepository());
+  final userEmail = AuthenticationRepository.instance.authUser.email ?? '';
 
   //fetch user's order history
   Future<List<OrderModel>> fetchUserOrders() async {
@@ -48,6 +49,7 @@ class OrderController extends GetxController {
       final order = OrderModel(
         id: UniqueKey().toString(),
         userId: userId,
+        userEmail: userEmail,
         status: OrderStatus.pending,
         totalAmount: totalAmount,
         orderDate: DateTime.now(),
@@ -71,6 +73,37 @@ class OrderController extends GetxController {
             onPressed: () => Get.offAll(() => const NavigationMenu()),
           ));
     } catch (e) {
+      TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+    }
+  }
+
+  // Cancel an order by ID
+  Future<void> cancelOrder(String orderId) async {
+    try {
+      // Starting loader
+      TFullScreenLoader.openLoadingDialog(
+        "Cancelling your Order...", TImages.loadingJuggleAnimation);
+
+        //Get User Auth
+        final userId = AuthenticationRepository.instance.authUser.uid;
+        if (userId.isEmpty) return;
+        // Update order status to cancelled in the repository
+      await orderRepository.updateOrderStatus(
+          orderId, userId, OrderStatus.cancelled);
+
+      // Stop loader
+      TFullScreenLoader.stopLoading();
+
+      // Show success feedback
+      TLoaders.successSnackBar(
+        title: 'Order Cancelled',
+        message: 'Your order has been successfully cancelled.',
+      );
+
+      // Navigate back to orders list
+      Get.offAll(() => const NavigationMenu());
+    } catch (e) {
+      TFullScreenLoader.stopLoading();
       TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
     }
   }
